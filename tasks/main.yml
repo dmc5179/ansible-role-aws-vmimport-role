@@ -1,7 +1,7 @@
 ---
 # tasks file for aws-vmimport-role
 # Setup/install tasks.
-- name: Create the vmimport IAM  Policy
+- name: Create the vmimport IAM Policy
   iam_managed_policy:
     policy_name: vmimport
     policy_description: "Policy used by the vmimport role."
