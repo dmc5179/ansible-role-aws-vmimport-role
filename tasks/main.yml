@@ -1,2 +1,18 @@
 ---
 # tasks file for aws-vmimport-role
+# Setup/install tasks.
+- name: Create the vmimport IAM  Policy
+  iam_managed_policy:
+    policy_name: vmimport
+    policy_description: "Policy used by the vmimport role."
+    policy: " {{ lookup( 'template', 'vmimport-policy.json.j2', convert_data=False) }}  "
+    state: present
+  register: aws
+
+- name: "Create the vmimport role and attach the vmimport policy'"
+  iam_role:
+    name: vmimport
+    assume_role_policy_document: " {{ lookup( 'template', 'vmimport-role.json.j2') }} "
+    managed_policy: "{{ aws.policy.arn }}"
+    state: present
+
