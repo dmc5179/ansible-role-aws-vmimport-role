@@ -13,9 +13,13 @@ None.
 Role Variables
 --------------
 
+`s3_bucket_name`
+
+The name of the S3 bucket where where the disk images to be convereted are stored. This is the only user provided variable required for the role.
+
 `s3_bucket_arn`
 
-The ARN of the S3 bucket where where the disk images to be convereted are stored.
+The dynamically generated ARN of the S3 bucket provided in the `s3_bucket_name` variable and used in the `vmimport-policy.json.j2` template.
 
 Dependencies
 ------------
@@ -32,7 +36,7 @@ Including an example of how to use your role (for instance, with variables passe
       roles:
         - rubrik-devops.aws-vmimport-role
       vars:
-        s3_bucket_arn: "arn:aws:s3:::examplebucket-east-2"
+        s3_bucket_name: "examplebucket-east-2"
 
 License
 -------
